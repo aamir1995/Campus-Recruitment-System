@@ -1,19 +1,30 @@
+import { Observable } from 'rxjs/Rx';
 import { Injectable, Inject } from '@angular/core';
 import * as fb from 'firebase';
 import { FirebaseApp, AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { BehaviorSubject } from 'rxjs';
+import "rxjs/add/operator/take";
+
 
 @Injectable()
 export class FirebaseService {
-
+    uuid: string;
     // private ref: fb.database.Reference;
     // private storage: fb.storage.Reference;
     // private auth: fb.auth.Auth;
     // public firebaseTimeStamp = fb.database['ServerValue'].TIMESTAMP;
 
     constructor(private af: AngularFire) {
-
+        this.af.auth.take(1)
+            .subscribe(auth => {
+                console.log(auth.uid + " subsssssssssssssssss")
+                if (auth !== null) { this.uuid = auth.uid };
+            });
     }
+
+    // checkUserResume() {
+    //     return Observable
+    // }
 
     signup(email: string, password: string) {
         return this.af.auth.createUser({ 'email': email, 'password': password });
@@ -27,6 +38,11 @@ export class FirebaseService {
         console.log(detailsObject);
         return this.af.database.object(`users/${uid}`)
             .set(detailsObject);
+    }
+
+    uploadResumeToFirebase(resumeObj: Object) {
+        return this.af.database.object(`studentsData/${this.uuid}`)
+            .set(resumeObj);
     }
 
     // saveMultipath(multipath) {

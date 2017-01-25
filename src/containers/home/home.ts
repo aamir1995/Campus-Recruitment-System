@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { FirebaseService } from '../../providers'
 // import 'rxjs/add/operator/distinctUntilChnaged';
 
 @Component({
@@ -9,9 +10,15 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class HomeContainer {
 
-  constructor() {
+  constructor(private fs: FirebaseService) {
   }
 
   ngOnInit() { }
+
+  uploadResume(e) {
+    this.fs.uploadResumeToFirebase(e)
+      .then(success => console.log("uploaded resume successfully", success))
+      .catch(err => console.log("an error occured" + err));
+  }
 
 }
