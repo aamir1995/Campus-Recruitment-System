@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<base href="/">
+	<title>Campus Recruitment System</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- TODO add manifest here -->
+	<link rel="manifest" href="/manifest.json">
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+	<script> 
+		if ('serviceWorker' in navigator) {
+			console.log('Service Worker is supported');
+			navigator.serviceWorker.register('./service-worker.js', { scope: '/' }).then(function (registration) {
+				console.log(':^)', registration);
+			}).catch(function (error) {
+				console.log(':^(', error);
+			});
+		}</script>
+<root></root>
+</body>
+
+</html>
