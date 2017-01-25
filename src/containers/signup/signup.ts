@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { FirebaseService } from '../../providers'
 
 @Component({
     selector: 'signup',
@@ -10,8 +11,17 @@ import { BehaviorSubject } from 'rxjs';
 export class SignupContainer {
 
     uId$: BehaviorSubject<string>;
-    emailRegx: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private fs: FirebaseService) { }
+
+    createAccount(e) {
+        this.fs.signup(e.email, e.password)
+            .then(auth => {
+                let extraDetails = { firstName: e.firstName, lastName: e.lastName, type: e.type }
+                this.fs.saveExtraDetails(auth.uid, extraDetails)
+                    .then(() => this.router.navigate(['home']));
+            })
+            .catch(err => console.log(err + "An error occured"));
+    }
 
 }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { MaterialModule } from '@angular/material';
@@ -22,6 +22,7 @@ import { EqualValidator } from '../directives/equal-validator.directive';
     , HttpModule
     , AngularFireModule.initializeApp(appConfig.config.firebaseConfig, appConfig.config.firebaseAuthConfig)
     , MomentModule
+    , ReactiveFormsModule
   ]
   , declarations: [RootContainer, EqualValidator, ...ApplicationComponents, ...Pipes]
   , providers: [...providers]

@@ -1,25 +1,42 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Create Account</h1>
-        <form>
+        <form [formGroup]="accountForm" (ngSubmit)="submitForm(accountForm.value)" novalidate>
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="exampleInputName2">First Name</label>
+                    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" [formControl]="accountForm.controls['firstName']">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail2">Last Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" [formControl]="accountForm.controls['lastName']">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" [formControl]="accountForm.controls['email']">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [formControl]="accountForm.controls['password']">
             </div>
             <div class="form-group">
+                <label class="radio-inline"><input type="radio" value="0" formControlName="type">I'm a Student</label>
+            </div>
+            <div class="form-group">
+                <label class="radio-inline"><input type="radio" value="1" formControlName="type">We Are Company</label>
+            </div>
+
+            <!--<div class="form-group">
                 <label for="exampleInputFile">File input</label>
                 <input type="file" id="exampleInputFile">
                 <p class="help-block">Example block-level help text here.</p>
-            </div>
-            <div class="checkbox">
+            </div>-->
+            <!--<div class="checkbox">
                 <label>
       <input type="checkbox"> Check me out
     </label>
-            </div>
+            </div>-->
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
     </div>

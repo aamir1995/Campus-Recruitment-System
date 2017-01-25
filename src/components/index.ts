@@ -1,9 +1,15 @@
 import { SignupComponent } from './signupComponent/signupComponent';
+import { LoginComponent } from './loginComponent/loginComponent';
+import { NavbarComponent } from './navbarComponent/navbarComponent';
 
 export const Components: any[] = [
-    SignupComponent
+    SignupComponent,
+    LoginComponent,
+    NavbarComponent
 ]
 
 export {
-    SignupComponent
+    SignupComponent,
+    LoginComponent,
+    NavbarComponent
 }
