@@ -8,19 +8,26 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class SignupComponent {
     @Output() details = new EventEmitter;
-    accountForm: FormGroup;
+
+    studentAccountForm: FormGroup;
+    companyAccountForm: FormGroup;
     emailRegx: RegExp = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
     constructor(private fb: FormBuilder) {
-        // Here we are using the FormBuilder to build out our form.
-        this.accountForm = fb.group({
-            // We can set default values by passing in the corresponding value or leave blank if we wish to not set the value. For our example, we’ll default the gender to female.
+        this.studentAccountForm = fb.group({
             'firstName': '',
             'lastName': '',
             'email': '',
             'password': '',
-            'type': ''
-        })
+            'type': 0
+        });
+
+        this.companyAccountForm = fb.group({
+            'companyName': '',
+            'email': '',
+            'password': '',
+            'type': 1
+        });
     }
 
     ngOnInit() { }

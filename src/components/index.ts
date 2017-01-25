@@ -6,10 +6,10 @@ export const Components: any[] = [
     SignupComponent,
     LoginComponent,
     NavbarComponent
-]
+];
 
 export {
     SignupComponent,
     LoginComponent,
     NavbarComponent
-}
+};

@@ -17,7 +17,9 @@ export class SignupContainer {
     createAccount(e) {
         this.fs.signup(e.email, e.password)
             .then(auth => {
-                let extraDetails = { firstName: e.firstName, lastName: e.lastName, type: e.type }
+                let extraDetails = e;
+                delete extraDetails.email;
+                delete extraDetails.password;
                 this.fs.saveExtraDetails(auth.uid, extraDetails)
                     .then(() => this.router.navigate(['home']));
             })
