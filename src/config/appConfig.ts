@@ -13,7 +13,7 @@ export class AppConfig {
                     apiKey: "AIzaSyDuLTn9XJ44Zb0wBWCV4v97Ds4eBtNdZQ8",
                     authDomain: "campus-recruitment-syste-25299.firebaseapp.com",
                     databaseURL: "https://campus-recruitment-syste-25299.firebaseio.com",
-                    storageBucket: "campus-recruitment-syste-25299.appspot.com",
+                    storageBucket: "campus-recruitment-syste-25299.appspot.com"
                 },
                 firebaseAuthConfig: { provider: AuthProviders.Password, method: AuthMethods.Password }
             };
@@ -23,7 +23,7 @@ export class AppConfig {
                     apiKey: "AIzaSyDuLTn9XJ44Zb0wBWCV4v97Ds4eBtNdZQ8",
                     authDomain: "campus-recruitment-syste-25299.firebaseapp.com",
                     databaseURL: "https://campus-recruitment-syste-25299.firebaseio.com",
-                    storageBucket: "campus-recruitment-syste-25299.appspot.com",
+                    storageBucket: "campus-recruitment-syste-25299.appspot.com"
                 },
                 firebaseAuthConfig: { provider: AuthProviders.Password, method: AuthMethods.Password }
             };
