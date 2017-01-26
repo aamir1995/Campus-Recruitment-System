@@ -8,7 +8,7 @@
     </ng-container>
 
     <ng-container *ngIf="isCompany">
-        <h1>Hello, nope i'm company</h1>
+        <show-applied-candidates *ngFor="let job of (specificJobs$ | async)" [myJobs]="job" (allCandidates)="viewAllCandidates($event)"></show-applied-candidates>
     </ng-container>
 </div>
 </div>

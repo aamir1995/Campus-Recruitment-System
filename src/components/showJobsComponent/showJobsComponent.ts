@@ -1,5 +1,3 @@
-import { Json } from '@angular/core/testing/facade/lang';
-import { jsonpFactory } from '@angular/http/src/http_module';
 import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -27,7 +25,7 @@ export class showJobsComponent {
 
     checkIfApplied(obj: any) {
         return obj[this.uuid]
-        
+
         // return obj.hasOwnProperty(Json.stringify(this.uuid));
     }
 

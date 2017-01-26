@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbarComponent/navbarComponent';
 import { UploadResumeComponent } from './uploadResumeComponent/uploadResumeComponent';
 import { PostJobsComponent } from './postJobsComponent/postJobsComponent';
 import { showJobsComponent } from './showJobsComponent/showJobsComponent';
+import { showAppliedComponent } from './showAppliedCandidates/appliedCandidates';
 
 export const Components: any[] = [
     SignupComponent,
@@ -11,7 +12,8 @@ export const Components: any[] = [
     NavbarComponent,
     UploadResumeComponent,
     PostJobsComponent,
-    showJobsComponent
+    showJobsComponent,
+    showAppliedComponent
 ];
 
 export {
@@ -20,5 +22,6 @@ export {
     NavbarComponent,
     UploadResumeComponent,
     PostJobsComponent,
-    showJobsComponent
+    showJobsComponent,
+    showAppliedComponent
 };

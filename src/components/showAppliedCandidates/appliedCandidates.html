@@ -1,0 +1,12 @@
+<table class="table table-striped">
+    <tr>
+        <th>Job Title</th>
+        <th>Total Applicants</th>
+        <th>Veiw All Candidates</th>
+    </tr>
+    <tr>
+        <td>{{myJobs.jobTitle}}</td>
+        <td>{{parseObj(myJobs.appliedCandidates)}}</td>
+        <td><button class="btn btn-default" role="button" (click)="viewAllCandidates(myJobs.$key)">View All Candidates</button></td>
+    </tr>
+</table>

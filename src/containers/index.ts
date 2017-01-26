@@ -4,6 +4,7 @@ import { SignupContainer } from './signup/signup';
 import { RootContainer } from './root/root';
 import { ResumeContainer } from './resume/resume';
 import { JobsContainer } from './jobs/jobs';
+import { CandidatesContainer } from './appliedCandidates/appliedCandidates';
 
 export const Containers: any[] = [
     HomeContainer
@@ -12,6 +13,7 @@ export const Containers: any[] = [
     , RootContainer
     , ResumeContainer
     , JobsContainer
+    , CandidatesContainer
 ]
 
 export {
@@ -21,4 +23,5 @@ export {
     , RootContainer
     , ResumeContainer
     , JobsContainer
+    , CandidatesContainer
 }

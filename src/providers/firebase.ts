@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 import { Injectable, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import * as fb from 'firebase';
 import { FirebaseApp, AngularFire, FirebaseObjectObservable } from 'angularfire2';
 import { BehaviorSubject } from 'rxjs';
@@ -15,7 +16,7 @@ export class FirebaseService {
     // private auth: fb.auth.Auth;
     // public firebaseTimeStamp = fb.database['ServerValue'].TIMESTAMP;
 
-    constructor(private af: AngularFire) {
+    constructor(private af: AngularFire, private router: Router) {
         this.checkUserAuth()
             .subscribe(auth => {
                 // console.log(auth.uid + " subsssssssssssssssss");
@@ -23,6 +24,9 @@ export class FirebaseService {
             });
     };
 
+    getSpecificCompanyJobs(uuid: string) {
+        return this.af.database.list('jobsByCompanies/' + uuid)
+    }
 
     checkUserAuth() {
         return this.af.auth;
@@ -33,6 +37,10 @@ export class FirebaseService {
             .object(`users/${this.uuid}`)
             .take(1)
     };
+
+    getAllCandidates(postUId) {
+        return this.af.database.object('jobsByCompanies/' + this.uuid + '/' + postUId);
+    }
 
     saveJobDetail(jobObj: Object) {
         jobObj['postedOn'] = firebase.database['ServerValue'].TIMESTAMP;
@@ -47,7 +55,6 @@ export class FirebaseService {
         obj['allJobs/' + pushKey.key] = jobObj;
 
         return firebase.database().ref().update(obj)
-        // return this.af.database.list(`jobs/${this.uuid}`).push(jobObj);
     }
 
     logOutUser() {
@@ -59,15 +66,21 @@ export class FirebaseService {
     };
 
     applyForJob(companyUid: string, postUid) {
-        console.log(companyUid, postUid)
-
-        let obj = {};
-        let userObj = { [this.uuid]: this.uuid };
-
-        obj['jobsByCompanies/' + companyUid + '/' + postUid + "/appliedCandidates"] = userObj;
-        obj['allJobs/' + postUid + "/appliedCandidates"] = userObj;
-
-        return firebase.database().ref().update(obj);
+        this.af.database.object('users/' + this.uuid)
+            .take(1)
+            .subscribe(data => {
+                if (data.status) {
+                    let userData = { 'firstname': data.firstName, 'lastname': data.lastName, 'gender': data.gender, 'cnic': data.cnic, 'mobile': data.mobile };
+                    let obj = {};
+                    let userObj = { [this.uuid]: userData };
+                    obj['jobsByCompanies/' + companyUid + '/' + postUid + "/appliedCandidates"] = userObj;
+                    obj['allJobs/' + postUid + "/appliedCandidates"] = userObj;
+                    return firebase.database().ref().update(obj);
+                } else {
+                    this.router.navigate(['resume']);
+                    return alert("Oh Snap! You Haven't uploaded your resume yet, Please Upload it ASAP!");
+                }
+            })
     }
 
     login(email: string, password: string) {
