@@ -1,0 +1,57 @@
+<div class="container" style="margin-top: 50px;">
+<h1>Post a Job</h1>
+<form [formGroup]="postJobForm" (ngSubmit)="submitForm(postJobForm.value)" novalidate>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Job Title</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Type job title here" [formControl]="postJobForm.controls['jobTitle']">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Vacancies</label>
+        <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Number of Total Vacancies" [formControl]="postJobForm.controls['vacancies']">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Job Description</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Type Job description here" [formControl]="postJobForm.controls['description']">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Department</label>
+        <select class="form-control" formControlName="department">
+                <option value="accounts">Accounts</option>
+                <option value="administration">Administration</option>
+                <option value="customer services">Customer Services</option>
+                <option value="finance">Finance</option>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Job Category</label>
+        <select class="form-control" formControlName="category">
+                <option value="administrative">Administrative</option>
+                <option value="media">Media</option>
+                <option value="autos">Autos</option>
+                <option value="education">Education</option>
+                <option value="electronics">Electronics</option>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Career Level</label>
+        <select class="form-control" formControlName="careerLevel">
+                <option value="automobile">Entry Level</option>
+                <option value="automobile">Experienced</option>
+                <option value="automobile">Student</option>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Job Type</label>
+        <select class="form-control" formControlName="jobType">
+                <option value="full time">Full Time</option>
+                <option value="intern">Intern</option>
+                <option value="part time">Part-Time</option>
+            </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Salary</label>
+        <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Password" [formControl]="postJobForm.controls['salary']">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</div>

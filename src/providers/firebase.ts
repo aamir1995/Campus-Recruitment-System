@@ -52,6 +52,12 @@ export class FirebaseService {
             .take(1)
     };
 
+    saveJobDetail(jobObj: Object) {
+        jobObj['postedOn'] = firebase.database['ServerValue'].TIMESTAMP;
+        jobObj['uid'] = this.uuid;
+        return this.af.database.list(`jobs/${this.uuid}`).push(jobObj);
+    }
+
     signup(email: string, password: string) {
         return this.af.auth.createUser({ 'email': email, 'password': password });
     };
@@ -71,6 +77,10 @@ export class FirebaseService {
         return this.af.database.object(`users/${this.uuid}`)
             .update(resumeObj);
     };
+
+    getAllJobs() {
+        return this.af.database.list(`jobs/`);
+    }
 
     // saveMultipath(multipath) {
     //     return this.ref.update(multipath);
