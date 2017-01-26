@@ -1,4 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirebaseService } from '../../providers'
 declare let firebase: any;
 
@@ -13,7 +14,7 @@ export class RootContainer {
   isStudent: boolean = false;
   isCompany: boolean = false;
 
-  constructor(private fs: FirebaseService) { }
+  constructor(private fs: FirebaseService, private router: Router) { }
 
   ngOnInit() {
     this.fs.checkUserAuth()
@@ -24,8 +25,17 @@ export class RootContainer {
             .subscribe(data => {
               data.type === 0 ? this.isStudent = true : this.isCompany = true
             })
+        } else {
+          this.isLoggedIn = false;
+          this.isStudent = false;
+          this.isCompany = false;
         }
       })
+  }
+
+  logout() {
+    this.fs.logOutUser()
+      .then(() => this.router.navigate(['signin']));
   }
 
 }

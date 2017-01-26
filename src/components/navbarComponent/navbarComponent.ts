@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'navbar',
@@ -10,10 +10,16 @@ export class NavbarComponent {
     @Input() isStudent: boolean = false;
     @Input() isCompany: boolean = false;
 
+    @Output() logout = new EventEmitter;
+
     constructor() {
     }
 
     ngOnInit() {
 
+    }
+
+    logOutUser() {
+        this.logout.emit();
     }
 }

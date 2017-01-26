@@ -20,7 +20,7 @@
                 <li *ngIf="!isLoggedIn"><a [routerLink]="['/signin']">Login</a></li>
                 <li>
                     <div *ngIf="!isLoggedIn" class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" [routerLink]="['/signup']">Sign up!</a></div>
-                    <div *ngIf="isLoggedIn" class="btn-nav"><a class="btn btn-primary btn-small navbar-btn" [routerLink]="['/signin']">Logout</a></div>
+                    <div *ngIf="isLoggedIn" class="btn-nav"><button class="btn btn-primary btn-small navbar-btn" (click)="logOutUser()">Logout</button></div>
                 </li>
             </ul>
         </div>

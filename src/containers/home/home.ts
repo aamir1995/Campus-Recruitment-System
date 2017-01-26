@@ -25,4 +25,12 @@ export class HomeContainer {
     this.allJobs$ = this.fs.getAllJobs();
   }
 
+  apply(e) {
+    console.log("from event", e);
+
+    this.fs.applyForJob(e.companyUid, e.jobUid)
+      .then(() => console.log("applied successfully"))
+      .catch(err => console.log(err + "an error occured"));
+  }
+
 }

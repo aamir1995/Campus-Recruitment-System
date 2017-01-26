@@ -39,7 +39,6 @@ export class FirebaseService {
         jobObj['uid'] = this.uuid;
 
         let pushKey = firebase.database().ref().push();
-        console.log(pushKey.key);
 
         let obj = {};
 
@@ -50,9 +49,25 @@ export class FirebaseService {
         // return this.af.database.list(`jobs/${this.uuid}`).push(jobObj);
     }
 
+    logOutUser() {
+        return Promise.resolve(this.af.auth.logout());
+    }
+
     signup(email: string, password: string) {
         return this.af.auth.createUser({ 'email': email, 'password': password });
     };
+
+    applyForJob(companyUid: string, postUid) {
+        console.log(companyUid, postUid)
+
+        let obj = {};
+        let userObj = { "uuid": this.uuid };
+
+        obj['jobsByCompanies/' + companyUid + '/' + postUid + "/appliedCandidates"] = userObj;
+        obj['allJobs/' + postUid + "/appliedCandidates"] = userObj;
+
+        return firebase.database().ref().update(obj);
+    }
 
     login(email: string, password: string) {
         return this.af.auth.login({ 'email': email, 'password': password })

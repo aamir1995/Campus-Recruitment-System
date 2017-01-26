@@ -5,8 +5,8 @@
         <div class="caption">
             <h2>{{jobs.jobTitle}}</h2>
             <p>{{jobs.description}}</p>
-            <p><a href="#" class="btn btn-primary" role="button">Apply!</a> <a class="btn btn-primary" role="button" data-toggle="collapse"
-                    href="#{{index}}" aria-expanded="false" aria-controls="collapseExample">Details</a></p>
+            <p><button class="btn btn-primary" role="button" (click)="apply(jobs.uid, jobs.$key)">Apply!</button> <a class="btn btn-default"
+                    role="button" data-toggle="collapse" href="#{{index}}" aria-expanded="false" aria-controls="collapseExample">Details</a></p>
             <div class="collapse" id="{{index}}">
                 <div class="well">
                     <table class="table table-striped">
@@ -42,3 +42,5 @@
     </div>
 
 </div>
+
+<hr style="border-color: gray;" />

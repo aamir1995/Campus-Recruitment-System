@@ -4,7 +4,7 @@
     <p>...</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
     <ng-container *ngIf="isStudent">
-        <show-jobs-component *ngFor="let job of (allJobs$ | async); let i = index" [jobs]="job" [index]="i"></show-jobs-component>
+        <show-jobs-component *ngFor="let job of (allJobs$ | async); let i = index" [jobs]="job" [index]="i" (applyForJob)="apply($event)"></show-jobs-component>
     </ng-container>
 
     <ng-container *ngIf="isCompany">

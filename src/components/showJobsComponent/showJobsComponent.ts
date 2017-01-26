@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     styles: [require('./showJobsComponent.scss')]
 })
 export class showJobsComponent {
-    // @Output() jobDesc = new EventEmitter;
+    @Output() applyForJob = new EventEmitter;
     @Input() jobs;
     @Input() index;
     constructor() {
@@ -15,6 +15,11 @@ export class showJobsComponent {
 
     ngOnInit() {
         console.log('jobs', this.jobs);
+    }
+
+    apply(companyUid: string, jobUid: string) {
+        let ids = { 'companyUid': companyUid, 'jobUid': jobUid }
+        this.applyForJob.emit(ids);
     }
 
 }
