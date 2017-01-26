@@ -19,7 +19,8 @@ export class SignupComponent {
             'lastName': '',
             'email': '',
             'password': '',
-            'type': 0
+            'type': 0,
+            'status': false
         });
 
         this.companyAccountForm = fb.group({

@@ -9,6 +9,7 @@ import "rxjs/add/operator/take";
 @Injectable()
 export class FirebaseService {
     uuid: string;
+    accountType: string;
     // private ref: fb.database.Reference;
     // private storage: fb.storage.Reference;
     // private auth: fb.auth.Auth;
@@ -20,30 +21,56 @@ export class FirebaseService {
                 console.log(auth.uid + " subsssssssssssssssss")
                 if (auth !== null) { this.uuid = auth.uid };
             });
-    }
+    };
 
     // checkUserResume() {
-    //     return Observable
+    //     return new Observable(observer => {
+    //         observer.next(() => {
+    //             this.af.database
+    //                 .list(`"users/"${this.uuid}`)
+    //                 .take(1)
+    //                 .map(val => console.info("val from USERS Node", val))
+    //         })
+    //         observer.next(() => {
+    //             this.af.database
+    //                 .list(`"studentsData/"${this.uuid}`)
+    //                 .take(1)
+    //                 .map(val => console.info("val from SudentsData Node", val))
+    //         })
+    //     })
     // }
+
+    checkUserProfile() {
+        return this.af.database
+            .object(`studentsData/${this.uuid}`)
+            .take(1)
+    };
+
+    returnAccountType() {
+        return this.af.database
+            .object(`users/${this.uuid}`)
+            .take(1)
+    };
 
     signup(email: string, password: string) {
         return this.af.auth.createUser({ 'email': email, 'password': password });
-    }
+    };
 
     login(email: string, password: string) {
         return this.af.auth.login({ 'email': email, 'password': password })
-    }
+    };
 
     saveExtraDetails(uid, detailsObject: Object) {
         console.log(detailsObject);
         return this.af.database.object(`users/${uid}`)
             .set(detailsObject);
-    }
+    };
 
     uploadResumeToFirebase(resumeObj: Object) {
-        return this.af.database.object(`studentsData/${this.uuid}`)
-            .set(resumeObj);
-    }
+        resumeObj['status'] = true;
+        return this.af.database.object(`users/${this.uuid}`)
+            .update(resumeObj);
+    };
 
     // saveMultipath(multipath) {
     //     return this.ref.update(multipath);

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FirebaseService } from '../../providers'
-// import 'rxjs/add/operator/distinctUntilChnaged';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'home',
@@ -13,12 +14,8 @@ export class HomeContainer {
   constructor(private fs: FirebaseService) {
   }
 
-  ngOnInit() { }
-
-  uploadResume(e) {
-    this.fs.uploadResumeToFirebase(e)
-      .then(success => console.log("uploaded resume successfully", success))
-      .catch(err => console.log("an error occured" + err));
+  ngOnInit() {
+    this.fs.returnAccountType()
   }
 
 }
