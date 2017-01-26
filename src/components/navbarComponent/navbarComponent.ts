@@ -1,5 +1,4 @@
-import { Component, Output, OnInit, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'navbar',
@@ -7,9 +6,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     styles: [require("./navbarComponent.scss")]
 })
 export class NavbarComponent {
+    @Input() isLoggedIn: boolean = false;
+    @Input() isStudent: boolean = false;
+    @Input() isCompany: boolean = false;
 
     constructor() {
     }
 
+    ngOnInit() {
 
+    }
 }

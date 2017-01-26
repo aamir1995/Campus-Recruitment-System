@@ -11,15 +11,18 @@ import 'rxjs/add/operator/mergeMap';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeContainer {
+  isStudent: boolean = false;
+  isCompany: boolean = false;
   allJobs$: Observable<any>;
 
   constructor(private fs: FirebaseService) {
   }
 
   ngOnInit() {
+    this.fs.returnAccountType()
+      .subscribe(data => { if (data.type == 0) { this.isStudent = true } else { this.isCompany = true } });
     this.fs.returnAccountType();
-    this.allJobs$ = this.fs.getAllJobs()
-    // .map(val => console.info(val));
+    this.allJobs$ = this.fs.getAllJobs();
   }
 
 }

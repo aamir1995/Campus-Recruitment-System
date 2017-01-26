@@ -1,10 +1,6 @@
-import { Component, Input, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-
-
-declare let google: any;
-
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { FirebaseService } from '../../providers'
 declare let firebase: any;
-
 
 @Component({
   selector: 'root',
@@ -12,12 +8,24 @@ declare let firebase: any;
   styles: [require('./root.scss')],
   encapsulation: ViewEncapsulation.None
 })
-export class RootContainer implements OnInit, OnDestroy {
+export class RootContainer {
+  isLoggedIn: boolean = false;
+  isStudent: boolean = false;
+  isCompany: boolean = false;
 
-  constructor() { }
+  constructor(private fs: FirebaseService) { }
 
-  ngOnInit() { }
-
-  ngOnDestroy() { }
+  ngOnInit() {
+    this.fs.checkUserAuth()
+      .subscribe(auth => {
+        if (auth !== null) {
+          this.isLoggedIn = true;
+          this.fs.returnAccountType()
+            .subscribe(data => {
+              data.type === 0 ? this.isStudent = true : this.isCompany = true
+            })
+        }
+      })
+  }
 
 }

@@ -1,8 +1,14 @@
 <div class="container" style="margin-top: 50px;">
 <div class="jumbotron">
-    <show-jobs-component *ngFor="let job of (allJobs$ | async)" [jobs]="job"></show-jobs-component>
     <!--<h1>Hello, world!</h1>
     <p>...</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
+    <ng-container *ngIf="isStudent">
+        <show-jobs-component *ngFor="let job of (allJobs$ | async)" [jobs]="job"></show-jobs-component>
+    </ng-container>
+
+    <ng-container *ngIf="isCompany">
+        <h1>Hello, nope i'm company</h1>
+    </ng-container>
 </div>
 </div>

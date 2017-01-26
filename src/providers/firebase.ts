@@ -16,35 +16,17 @@ export class FirebaseService {
     // public firebaseTimeStamp = fb.database['ServerValue'].TIMESTAMP;
 
     constructor(private af: AngularFire) {
-        this.af.auth.take(1)
+        this.checkUserAuth()
             .subscribe(auth => {
-                console.log(auth.uid + " subsssssssssssssssss")
+                // console.log(auth.uid + " subsssssssssssssssss");
                 if (auth !== null) { this.uuid = auth.uid };
             });
     };
 
-    // checkUserResume() {
-    //     return new Observable(observer => {
-    //         observer.next(() => {
-    //             this.af.database
-    //                 .list(`"users/"${this.uuid}`)
-    //                 .take(1)
-    //                 .map(val => console.info("val from USERS Node", val))
-    //         })
-    //         observer.next(() => {
-    //             this.af.database
-    //                 .list(`"studentsData/"${this.uuid}`)
-    //                 .take(1)
-    //                 .map(val => console.info("val from SudentsData Node", val))
-    //         })
-    //     })
-    // }
 
-    checkUserProfile() {
-        return this.af.database
-            .object(`studentsData/${this.uuid}`)
-            .take(1)
-    };
+    checkUserAuth() {
+        return this.af.auth;
+    }
 
     returnAccountType() {
         return this.af.database
@@ -55,7 +37,17 @@ export class FirebaseService {
     saveJobDetail(jobObj: Object) {
         jobObj['postedOn'] = firebase.database['ServerValue'].TIMESTAMP;
         jobObj['uid'] = this.uuid;
-        return this.af.database.list(`jobs/${this.uuid}`).push(jobObj);
+
+        let pushKey = firebase.database().ref().push();
+        console.log(pushKey.key);
+
+        let obj = {};
+
+        obj['jobsByCompanies/' + this.uuid + '/' + pushKey.key] = jobObj;
+        obj['allJobs/' + pushKey.key] = jobObj;
+
+        return firebase.database().ref().update(obj)
+        // return this.af.database.list(`jobs/${this.uuid}`).push(jobObj);
     }
 
     signup(email: string, password: string) {
@@ -79,7 +71,7 @@ export class FirebaseService {
     };
 
     getAllJobs() {
-        return this.af.database.list(`jobs/`);
+        return this.af.database.list(`allJobs/`);
     }
 
     // saveMultipath(multipath) {

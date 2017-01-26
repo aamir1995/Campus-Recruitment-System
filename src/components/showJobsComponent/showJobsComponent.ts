@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     styles: [require('./showJobsComponent.scss')]
 })
 export class showJobsComponent {
-    @Output() jobDesc = new EventEmitter;
+    // @Output() jobDesc = new EventEmitter;
     @Input() jobs;
     constructor() {
     }
