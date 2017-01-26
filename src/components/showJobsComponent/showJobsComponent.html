@@ -6,13 +6,39 @@
             <h2>{{jobs.jobTitle}}</h2>
             <p>{{jobs.description}}</p>
             <p><a href="#" class="btn btn-primary" role="button">Apply!</a> <a class="btn btn-primary" role="button" data-toggle="collapse"
-                    href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Details</a></p>
+                    href="#{{index}}" aria-expanded="false" aria-controls="collapseExample">Details</a></p>
+            <div class="collapse" id="{{index}}">
+                <div class="well">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Total Vacancies:</th>
+                            <td>{{jobs.vacancies || 'Not Provided'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Career Level:</th>
+                            <td>{{jobs.careerLevel || 'Not Provided'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Category:</th>
+                            <td>{{jobs.category || 'Not Provided'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Department</th>
+                            <td>{{jobs.department || 'Not Provided'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Job Type</th>
+                            <td>{{jobs.jobType || 'Not Provided'}}</td>
+                        </tr>
+                        <tr>
+                            <th>Salary</th>
+                            <td>{{jobs.salary || 'Not Provided'}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         <!--</div>-->
     </div>
-    <div class="collapse" id="collapseExample">
-        <div class="well">
-            ...
-        </div>
-    </div>
+
 </div>

@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class showJobsComponent {
     // @Output() jobDesc = new EventEmitter;
     @Input() jobs;
+    @Input() index;
     constructor() {
     }
 
