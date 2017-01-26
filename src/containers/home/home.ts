@@ -15,6 +15,8 @@ export class HomeContainer {
   isCompany: boolean = false;
   allJobs$: Observable<any>;
 
+  uuid: string;
+
   constructor(private fs: FirebaseService) {
   }
 
@@ -23,6 +25,10 @@ export class HomeContainer {
       .subscribe(data => { if (data.type == 0) { this.isStudent = true } else { this.isCompany = true } });
     this.fs.returnAccountType();
     this.allJobs$ = this.fs.getAllJobs();
+
+    this.fs.checkUserAuth()
+      .take(1)
+      .subscribe(auth => this.uuid = auth.uid);
   }
 
   apply(e) {

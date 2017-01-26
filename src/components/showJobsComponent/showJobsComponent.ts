@@ -1,3 +1,5 @@
+import { Json } from '@angular/core/testing/facade/lang';
+import { jsonpFactory } from '@angular/http/src/http_module';
 import { Component, Output, Input, OnInit, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -10,6 +12,7 @@ export class showJobsComponent {
     @Output() applyForJob = new EventEmitter;
     @Input() jobs;
     @Input() index;
+    @Input() uuid;
     constructor() {
     }
 
@@ -20,6 +23,12 @@ export class showJobsComponent {
     apply(companyUid: string, jobUid: string) {
         let ids = { 'companyUid': companyUid, 'jobUid': jobUid }
         this.applyForJob.emit(ids);
+    }
+
+    checkIfApplied(obj: any) {
+        return obj[this.uuid]
+        
+        // return obj.hasOwnProperty(Json.stringify(this.uuid));
     }
 
 }

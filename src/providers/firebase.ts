@@ -37,6 +37,7 @@ export class FirebaseService {
     saveJobDetail(jobObj: Object) {
         jobObj['postedOn'] = firebase.database['ServerValue'].TIMESTAMP;
         jobObj['uid'] = this.uuid;
+        jobObj['appliedCandidates'] = "";
 
         let pushKey = firebase.database().ref().push();
 
@@ -61,7 +62,7 @@ export class FirebaseService {
         console.log(companyUid, postUid)
 
         let obj = {};
-        let userObj = { "uuid": this.uuid };
+        let userObj = { [this.uuid]: this.uuid };
 
         obj['jobsByCompanies/' + companyUid + '/' + postUid + "/appliedCandidates"] = userObj;
         obj['allJobs/' + postUid + "/appliedCandidates"] = userObj;
